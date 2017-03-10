@@ -23,17 +23,17 @@ int main()
 Our compiler is `arm-linux-gnueabihf-g++` and we will invoke it with from within a simple wrapper (`compile.sh`), which should yield `hello` executable.
 It can be run with `qemu-arm` to which we also need to pass path to the runtime libraries.
 ```sh
-qemu-arm -L /usr/arm-linux-gnueabihf ${@}
+$ qemu-arm -L /usr/arm-linux-gnueabihf ${@}
 ```
 (see `qemu.sh`)
-After running `./qemu.sh ./hello` we should be greeted with 'Hello ARM!' on our terminal.
+After running `./qemu.sh ./hello` we should be greeted with `Hello ARM!` on our terminal.
 
 # Debugging
-To debug our application we will tell 'qemu-arm' to start it in debug mode listening on specified port, e.g.
+To debug our application we will tell `qemu-arm` to start it in debug mode listening on specified port, e.g.
 ```sh
-qemu-arm -L /usr/arm-linux-gnueabihf -g 1234 ./hello
+$ qemu-arm -L /usr/arm-linux-gnueabihf -g 1234 ./hello
 ```
-(see 'qemu-gdb.sh')
+(see `qemu-gdb.sh`)
 In another terminal we will launch `gdb-multiarch`:
 ```sh
 $ gdb-multiarch
@@ -72,9 +72,9 @@ Breakpoint 1, main () at hello.cpp:5
 In the above first we had to tell gdb from where to load debug symbols (`file`), then we have set the hardware architecture (`set architecture`), followed by specifying location on runtime libraries (`set sysroot`). Once done with that we connect to `qemu` started just a while ago (`target remote`), set the breakpoint, and let the execution to continue.
 
 # Unit testing
-For unit testing we will use Google Test/Mock combo. We will need native ARM libraries which we will compile ourselves. One thing to note - `gtest` will be built with thread disabled to remove dependency on `pthreads` which we do not have cross-compiled.
+For unit testing we will use Google Test/Mock combo. We will need native ARM libraries which we will compile ourselves. One thing to note - `gtest` will be built with threads disabled to remove dependency on `pthreads`, which we do not have cross-compiled.
 ```sh
-cmake \
+$ cmake \
 -DCMAKE_BUILD_TYPE=Release \
 -DBUILD_GTEST=ON -DBUILD_GMOCK=ON \
 -Dgtest_disable_pthreads=ON \
