@@ -8,6 +8,14 @@ $ sudo apt-get install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf qemu-syst
 (see `setup.sh`)
 This will install hard-float `gcc` cross-compiler & toolchain, `qemu`, and `gdb`.
 
+```sh
+$ arm-linux-gnueabihf-g++ --version
+arm-linux-gnueabihf-g++ (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.4) 5.4.0 20160609
+Copyright (C) 2015 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
 # "Hello ARM!"
 Let's compile and run the simplest of examples - "Hello ARM!" program.
 ```c++
