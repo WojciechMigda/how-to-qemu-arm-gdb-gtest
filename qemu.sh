@@ -1,3 +1,3 @@
 #!/bin/sh
 
-qemu-arm -L /usr/arm-linux-gnueabihf ./hello
+qemu-arm -L /usr/arm-linux-gnueabihf ${@}
