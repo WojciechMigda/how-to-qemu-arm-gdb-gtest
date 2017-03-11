@@ -111,3 +111,16 @@ Running main() from gmock_main.cc
 [  PASSED  ] 2 tests.
 ```
 
+# Tcp server within `qemu`
+We can also launch tcp server within `qemu` and it will be able to communicate with the outside x86 world.
+Once we compile attached golf server code (`echo_golf.c`) we can start it and then connect to it with `telnet`:
+```sh
+$ ./qemu.sh ./echo_golf 1234 &
+$ telnet localhost 1234
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+128
+Connection closed by foreign host.
+```
+It outputs `128`, which is a sum of decimal IP4 address fields.
