@@ -62,7 +62,7 @@ Type "apropos word" to search for commands related to "word".
 (gdb) file hello
 Reading symbols from hello...done.
 (gdb) set architecture armv5te
-The target architecture is assumed to be armv5te
+The target architecture is assumed to be armv5teset sysroot /usr/arm-linux-gnueabihf/
 (gdb) set sysroot /usr/arm-linux-gnueabihf/
 (gdb) target remote localhost:1234
 Remote debugging using localhost:1234
@@ -78,6 +78,18 @@ Breakpoint 1, main () at hello.cpp:5
 (gdb)
 ```
 In the above first we had to tell gdb from where to load debug symbols (`file`), then we have set the hardware architecture (`set architecture`), followed by specifying location on runtime libraries (`set sysroot`). Once done with that we connect to `qemu` started just a while ago (`target remote`), set the breakpoint, and let the execution to continue.
+
+You can also execute the above in single command:
+
+```
+gdb-multiarch --ex="set arch armv5te" --ex="set sysroot /usr/arm-linux-gnueabihf/" --ex="target remote localhost:1234" --ex="break main" hello
+```
+
+If you prefer `ddd` this is the command for you:
+
+```
+ddd --debugger='gdb-multiarch --ex="set arch armv5te" --ex="set sysroot /usr/arm-linux-gnueabihf/" --ex="target remote localhost:1234" --ex="break main" hello' --gdb
+```
 
 # Unit testing
 For unit testing we will use Google Test/Mock combo. We will need native ARM libraries which we will compile ourselves. One thing to note - `gtest` will be built with threads disabled to remove dependency on `pthreads`, which we do not have cross-compiled.
@@ -123,4 +135,4 @@ Escape character is '^]'.
 128
 Connection closed by foreign host.
 ```
-It outputs `128`, which is a sum of decimal IP4 address fields.
+It outputs `128`, which is a sum of decimal IPv4 address octet components.
